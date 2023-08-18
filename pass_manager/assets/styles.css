@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #b6fcf9;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #d2f7f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li{
+    list-style: none;
+    margin: 0px 25px;
+}
+
+.left{
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    
+
+}
+
+.brand-logo{
+    margin: 10px 20px;
+}
+
+.brand-logo img{
+    height: 80px;
+}

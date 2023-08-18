@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "accounts.apps.AccountsConfig",
     "home.apps.HomeConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -77,8 +78,12 @@ WSGI_APPLICATION = "pass_manager.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "pass",
+        "USER": "postgres",
+        "PASSWORD": "aakash1408",
+        "HOST": "localhost",
+        "PORT": "5432"
     }
 }
 
@@ -119,6 +124,11 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

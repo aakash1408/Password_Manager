@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Aegis</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6511f82daf.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="left">
+                <div class ="brand-logo"><img src="{% static 'images/png-transparent-password-manager-user-computer-icons-password-safe-safe-blue-text-technic.png' %}" alt="Logo"></div>
+                <div class ="name"><span><a class="brand-name" href = "#">Aegis</a></span></div>
+            </div>
+            <div class="mid">
+                <ul>
+                    <li><a class = "options" href = ""><i class="fa-solid fa-house"></i>Home</a></li>
+                    <li><a class = "options" href = ""><i class="fa-solid fa-caret-down"></i>Features</a></li>
+                    <li><a class = "options" href = ""><i class="fa-solid fa-phone"></i>Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class = "right">
+                {% if signed %}
+                    <div class = "signed_name"> {{name}} </div>
+                {% else %}
+                    <a href="accounts/signin">
+                        <button class="signin-button">Sign in</button>
+                    </a>
+                    <a href="">
+                        <button class="login-button">Log in</button>
+                    </a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    
+        <main>
+
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class ="side-container">
+                        <a href="#">
+                            <i class="fas fa-home fa-lg"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class ="side-container" style = "margin:50px;">
+                        <a href="#">
+                            <i class="fas fa-info-circle fa-lg"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li class ="side-container">
+                        <a href="#">
+                            <i class="fas fa-cog fa-lg"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+
+            
+                </ul>
+            </div>
+            
+            <section>
+                <section class = "display-header">
+                    <div class = "display-title">
+                    <h3> Passwords</h3>
+                    </div>
+
+                    <div class = "add-button">
+                        <button id="addPass">Add</button>
+                    <div>
+                </section>
+
+                <form id ="addPassword">
+                    
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name"><br><br>
+                    
+                    <input type="submit" value="Submit">
+                </form>
+
+            </section>
+
+            
+        </main>
+
+        <script>
+            const addPass = document.getElementById("addPass");
+            
+    
+            addPass.addEventListener("click", () => {
+                const addPassword = document.getElementById("addPassword");
+                if (addPassword) {
+                addPassword.style.display = "block"; // Show the form
+            }
+            });
+        </script>
+        
+
+    
+
+</body>
+</html>

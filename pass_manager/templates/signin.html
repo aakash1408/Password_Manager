@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Aegis</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'signin_styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <form id="signup-form" method="post">
+              {% csrf_token %}
+              <h1>Sign In</h1>
+              <input type="text" id="text" placeholder="First Name" name = "first_name" required>
+              <input type="text" id="text" placeholder="Last Name" name = "last_name" required>
+              <input type="email" id="email" placeholder="Email" name = "email" required>
+              <input type="password" id="password" placeholder="Password" name = "password1" required>
+              <input type="password" id="password" placeholder="Confirm Password" name = "password2" required>
+              {% if error_message %}
+              <span style="color: red; font-size: 13px;">{{ error_message }}</span>
+              {% endif %}
+              {% if email_exists %}
+              <span style="color: red; font-size: 13px;">{{ email_exists }}</span>
+              {% endif %}
+              <button type="submit">Sign In</button>
+              <div class="separator">or</div>
+              <button id="google-signup">Sign In with Google</button>
+            </form>
+          </div>
+    </body>
+</html>

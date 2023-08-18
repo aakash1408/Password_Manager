@@ -1,0 +1,191 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #b6fcf9;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #d2f7f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li{
+    list-style: none;
+    margin: 0px 25px;
+}
+
+.left{
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    
+
+}
+
+.brand-logo{
+    margin: 10px 20px;
+}
+
+.brand-logo img{
+    height: 80px;
+}
+
+span{
+    color: darkblue;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+}
+.name{
+    font-family: 'Roboto', sans-serif;
+}
+
+.brand-name{
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.brand-name:hover {
+    color: black;
+}
+
+.signin-button {
+    padding: 10px 20px;
+    background-color: darkblue;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer; /* Add cursor style to indicate it's clickable */
+    transition: background-color 0.3s ease;
+}
+
+.signin-button:hover {
+    background-color: #ffaa33;
+}
+
+.login-button {
+    padding: 10px 20px;
+    background-color: darkblue;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer; /* Add cursor style to indicate it's clickable */
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #ffaa33;
+}
+
+.banner-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 39px;
+}
+.banner{
+    font-size: 50px;
+}
+
+p.content-info{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+main{
+    display: flex;
+}
+
+.sidebar {
+    width: 150px;
+    height: 100vh;
+    background-color: #042331;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    
+}
+
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-menu li {
+    margin-bottom: 20px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-menu a i {
+    margin-bottom: 10px;
+    font-size: 1.5rem; 
+}
+
+.side-container{
+    margin: 30px;
+}
+
+.display-title{
+    margin: 10px;
+}
+
+.display-header{
+    display: flex;
+    align-items: center;
+}
+
+.add-button{
+    margin:30px;
+}
+
+
+#addPass {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#addPass:hover {
+    background-color: #2980b9;
+}
+
+#addPassword{
+    display: None;
+}
