@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Aegis</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'signin_styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <form id="login-form" method="post">
+              {% csrf_token %}
+              <h1>Log In</h1>
+              <input type="text" id="text" placeholder="Username" name = "username" required>
+            
+              <input type="password" id="password" placeholder="Password" name = "password" required>
+              
+              {% if error_message %}
+              <span style="color: red; font-size: 13px;">{{ error_message }}</span>
+              {% endif %}
+            
+              <button type="submit">Log In</button>
+              
+            </form>
+          </div>
+    </body>
+</html>

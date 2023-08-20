@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/6511f82daf.js" crossorigin="anonymous"></script>
+    
+
 
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 
@@ -25,24 +27,26 @@
         <nav>
             <div class="left">
                 <div class ="brand-logo"><img src="{% static 'images/png-transparent-password-manager-user-computer-icons-password-safe-safe-blue-text-technic.png' %}" alt="Logo"></div>
-                <div class ="name"><span><a class="brand-name" href = "#">Aegis</a></span></div>
+                <div class ="name"><span><a class="brand-name" href = "{% url 'home' %}">Aegis</a></span></div>
             </div>
             <div class="mid">
                 <ul>
-                    <li><a class = "options" href = ""><i class="fa-solid fa-house"></i>Home</a></li>
-                    <li><a class = "options" href = ""><i class="fa-solid fa-caret-down"></i>Features</a></li>
-                    <li><a class = "options" href = ""><i class="fa-solid fa-phone"></i>Contact Us</a></li>
+                    <li><a class = "options" href = "{% url 'home' %}"><i class="fa-solid fa-house"></i>Home</a></li>
+                    <li><a class = "options" href = "#fet-sec"><i class="fa-solid fa-caret-down"></i>Features</a></li>
+                    <li><a class = "options" href = "#foot"><i class="fa-solid fa-phone"></i>Contact Us</a></li>
                 </ul>
             </div>
 
             <div class = "right">
                 {% if signed %}
                     <div class = "signed_name"> {{name}} </div>
+                {% elif login_state %}
+                    <div class = "signed_name"> Welcome {{user.first_name}} </div>
                 {% else %}
-                    <a href="accounts/signin">
+                    <a href="{% url 'signin' %}">
                         <button class="signin-button">Sign in</button>
                     </a>
-                    <a href="acc">
+                    <a href="{% url 'login' %}">
                         <button class="login-button">Log in</button>
                     </a>
                 {% endif %}
@@ -53,18 +57,112 @@
     <div class = "banner-content">
         <section class = "content">
             <h1 class = "banner">Secure yourself <br>Today with a <br> Password Manager</h1>
-            <p class = "content-info">Forget the hassle of memerising password. Now manage all <br>of your passwordas using <span>Aegis.</span> 
+            <p class = "content-info">Forget the hassle of memerising password. Now manage all <br>of your passwordas using Aegis. 
             Now using a single Master <br>Password amange all of your Passwords</p>
         </section>
-        <div class ="security-pics"><img src="{% static 'images/istockphoto-1458701864-170667a.webp' %}" alt="image"></div>
+        <div class ="security-pics"><img src="{% static 'images/homepage-hero-2.jpg' %}" alt="image"></div>
     </div>
 
     <div class = "main-content">
         {% if signed %}
-            <a href="accounts/info">
-                <button class="enter-button">Enter In</button>
-            </a>
+            
+            <div class = "main-content-text">
+                <h1> Hi {{name}}</h1>
+            </div>
+            <div>
+                <a href = "{% url 'info' %}"><button class = "goto">Go to your Password manager</button></a>
+            </div>
+
+        {% elif login_state %}
+        <div class = "main-content-text">
+            <h1> Hi {{user.first_name}}  {{user.last_name}}</h1>
+        </div>
+        <div>
+            <a href = "{% url 'info' %}"><button class = "goto">Go to your Password manager</button></a>
+        </div>
+
+
+
+        {% else %}
+            <div class = "main-content-text">
+                <h1> Book your Security Now </h1>
+            </div>    
+            <div>
+            <a href="{% url 'signin' %}"><button class="book-security">Book Security</button></a>
+            </div>
+        {% endif %}    
     </div>
+
+    {% comment %} {% if login_state %}
+        <div class = "main-content">
+            <div>
+                <h1> {{user.first_name}} </h1>
+            </div>
+            <div>
+                <a href = "info/"><button>Go to your Password manager</button></a>
+            </div>
+
+    {% endif %}    
+    </div> {% endcomment %}
+{% comment %} 
+    <section class = "carousel-section">
+        <h1>Take command over your security</h1>
+        <div class = "carousel-container">
+            <div class = "image-container">
+                <img src="{% static 'images/cyber1.jpg' %}" alt="image1">
+                <img src="{% static 'images/cyber2.jpg' %}" alt="image2">
+                <img src="{% static 'images/cyber3.jpg' %}" alt="image3">
+                <img src="{% static 'images/cyber4.jpg' %}" alt="image4">
+            </div>
+        </div>
+    </section>     {% endcomment %}
+
+
+    <section class="features-section" id = "fet-sec">
+    
+        <div class="feature">
+            <img src="{% static 'images/cyber4.jpg' %}" alt="Feature 1">
+            <h3>Secure Storage</h3>
+            <p>Safely store your passwords in an encrypted vault.</p>
+        </div>
+        <div class="feature">
+            <img src="{% static 'images/cyber2.jpg' %}" alt="Feature 2">
+            <h3>Password Generator</h3>
+            <p>Create strong and unique passwords with our generator.</p>
+        </div>
+        <div class="feature">
+            <img src="{% static 'images/cyber3.jpg' %}" alt="Feature 3">
+            <h3>Auto-Fill</h3>
+            <p>Effortlessly fill login forms with saved credentials.</p>
+        </div>
+    </section>
+
+
+    <footer class="footer" id = "foot">
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>Email: contact@passwordmanager.com</p>
+            <p>Phone: 9999999999</p>
+        </div>
+        <div class="footer-details">
+            <h3>Password Manager</h3>
+            <p>Securely manage your passwords with our app.</p>
+            <p>&copy; 2023 Password Manager. All rights reserved.</p>
+        </div>
+        <div class="footer-social">
+            <h3>Connect With Us</h3>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+    
+
+
+
+
+    
+
 
 </body>
 </html>
