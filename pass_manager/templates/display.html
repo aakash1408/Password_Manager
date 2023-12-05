@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
     
     <title>Aegis</title>
     
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -80,6 +82,8 @@
             
                 </ul>
             </div>
+
+            
             
             <section style = "margin-left : 150px;">
                 <div class = "display-header">
@@ -91,6 +95,8 @@
                         <button id="addPass">Add</button>
                     </div>
                 </div>
+
+
 {% comment %}                 
                <div class = "show-passwords">
                     {% for pat in passs %}
@@ -110,24 +116,48 @@
                         <h2> Name : {{ password_entry.website }}</h2>
                         <hr style = "background-color: black;">
                         <p>Notes : {{ password_entry.notes }}</p>
-                        <button class="view-button">View Password</button>
+                       
+                         
+                        {% if view_yes %}
+                            {{password_entry.password_hash}}
+                        {% else %}
+                        <button id = "viewPass" class="view-button">View Password</button>
+                        {% endif %}
+                        
+
+                        <button class="update-button" data-entry-id="{{ password_entry.id }}">Update Password</button>
+                             
+                        <button class="delete-button" data-entry-id="{{ password_entry.id }}">Delete Password</button>
+      
+                        {% comment %} <button id = "updatePass" class="view-button">Update Password</button> {% endcomment %}
+
+
+                        {% comment %} <a href = "{% url 'update' %}">
+                        <a href = "{% url 'delete' %}"><button id = "deletePass" class="view-button">Delete Password</button>
+                         {% endcomment %}
+                            
+                        {% if error_message %}
+                        <span style="color: red; font-size: 13px;">{{ error_message }}</span>
+                        {% endif %}
+                    
                     </div>
                     {% endfor %}
                 </div>
 
 
+        
 
                 <div class="modal" id="newPasswordModal">
                     <div class="modal-content">
                         <span class="close-button" id="closeButton">&times;</span>
                         <h2>Add New Password</h2>
-                        <form class="password-form" action="" method="post">
+                        <form class="password-form" action="{% url 'info' %}" method="post">
                             {% csrf_token %}
                             <label for="website">Website Name</label>
-                            <input type="text" id="website" name="website" placeholder="Enter website/app name" required>
+                            <input type="text" id="website" name="websitee" placeholder="Enter website/app name" required>
                         
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                            <input type="password" id="password1" name="password" placeholder="Enter password" required>
                         
                             <label for="notes">Notes</label>
                             <textarea id="notes" name="notes" placeholder="Enter notes"></textarea>
@@ -138,6 +168,81 @@
                     </div>
                 </div>
 
+                <div class="modal" id="viewpasswordModal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closeButton1">&times;</span>
+                        <h2>View Password</h2>
+                        <form class="password-form" action="{% url 'view' %}" method="post">
+                            {% csrf_token %}
+                            <label for="website">Username</label>
+                            <input type="text" id="username" name="username" placeholder="Enter Username" required>
+                        
+                            <label for="password">Enter master Password</label>
+                            <input type="password" id="password2" name="password" placeholder="Enter master password" required>
+                        
+                        
+                            <a href = "{% url 'view' %}"><button type="submit">View Password</button></a>
+                            
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="modal" id="updatepasswordModal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closeButton2">&times;</span>
+                        <h2>Update Password</h2>
+                        <form class="password-form" action="{% url 'update' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="entry_id" id="entryIdInput" value="">
+
+                            <label for="website">Username</label>
+                            <input type="text" id="username3" name="username" placeholder="Enter Username" required>
+                        
+                            <label for="password">Enter master Password</label>
+                            <input type="password" id="password3" name="master_password" placeholder="Enter master password" required>
+                        
+
+                            <label for="password">Enter new Password</label>
+                            <input type="password" id="password3" name="password" placeholder="Enter new password" required>
+                        
+                            <a href = "{% url 'update' %}">   
+                            <button type="submit">Update Password</button></a>
+                            
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal" id="deletepasswordModal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closeButton3">&times;</span>
+                        <h2>Delete Password</h2>
+                        <form class="password-form" action="{% url 'delete' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="idd" id="entryIdadd" value="">
+                            <label for="website">Username</label>
+                            <input type="text" id="username3" name="username" placeholder="Enter Username" required>
+                        
+                            <label for="password">Enter master Password</label>
+                            <input type="password" id="password3" name="password" placeholder="Enter master password" required>
+                        
+                            <a href = "{% url 'delete' %}">   
+                            <button type="submit">Delete Password</button></a>
+                            
+                        </form>
+                    </div>
+                </div>
+
+
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+
+
             </section>
 
             
@@ -145,6 +250,65 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                const newPasswordButton = document.getElementById("addPass");
+                const newPasswordModal = document.getElementById("newPasswordModal");
+                const closeButton = document.getElementById("closeButton");
+                const viewPasswordButtons = document.querySelectorAll(".view-button");
+                const viewpasswordModal = document.getElementById("viewpasswordModal");
+                const closeButton1 = document.getElementById("closeButton1");
+                const updatePasswordButtons = document.querySelectorAll(".update-button"); // Add the class to your update buttons
+                const updatepasswordModal = document.getElementById("updatepasswordModal");
+                const entryIdInput = document.getElementById("entryIdInput");
+                const closeButton2 = document.getElementById("closeButton2");
+                const deletePasswordButtons = document.querySelectorAll(".delete-button"); // Add the class to your delete buttons
+                const deletepasswordModal = document.getElementById("deletepasswordModal");
+                const closeButton3 = document.getElementById("closeButton3");
+                
+                newPasswordButton.addEventListener("click", function() {
+                    newPasswordModal.style.display = "block";
+                });
+        
+                closeButton.addEventListener("click", function() {
+                    newPasswordModal.style.display = "none";
+                });
+        
+                viewPasswordButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        viewpasswordModal.style.display = "block";
+                    });
+                });
+        
+                closeButton1.addEventListener("click", function() {
+                    viewpasswordModal.style.display = "none";
+                });
+        
+                updatePasswordButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        const entryId = button.getAttribute("data-entry-id");
+                        entryIdInput.value = entryId;
+                        updatepasswordModal.style.display = "block";
+                    });
+                });
+        
+                closeButton2.addEventListener("click", function() {
+                    updatepasswordModal.style.display = "none";
+                });
+        
+                deletePasswordButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        const entryId = button.getAttribute("data-entry-id");
+                        entryIdadd.value = entryId;
+                        deletepasswordModal.style.display = "block";
+                    });
+                });
+        
+                closeButton3.addEventListener("click", function() {
+                    deletepasswordModal.style.display = "none";
+                });
+            });
+                
+            
+            {% comment %} document.addEventListener("DOMContentLoaded", function() {
                 const newPasswordButton = document.getElementById("addPass");
                 const newPasswordModal = document.getElementById("newPasswordModal");
                 const closeButton = document.getElementById("closeButton");
@@ -158,6 +322,52 @@
                 });
             });
             
+
+            document.addEventListener("DOMContentLoaded", function() {
+                event.preventDefault();
+                const viewPasswordButton = document.getElementById("viewPass");
+                const viewpasswordModal = document.getElementById("viewpasswordModal");
+                const closeButton1 = document.getElementById("closeButton1");
+            
+                viewPasswordButton.addEventListener("click", function() {
+                    viewpasswordModal.style.display = "block";
+                });
+            
+                closeButton1.addEventListener("click", function() {
+                    viewpasswordModal.style.display = "none";
+                });
+            });
+ {% endcomment %}
+
+{% comment %} 
+            document.addEventListener("DOMContentLoaded", function() {
+                const updatePasswordButton = document.getElementById("updatePass");
+                const updatepasswordModal = document.getElementById("updatepasswordModal");
+                const closeButton3 = document.getElementById("closeButton3");
+            
+                updatePasswordButton.addEventListener("click", function() {
+                    updatepasswordModal.style.display = "block";
+                });
+            
+                closeButton3.addEventListener("click", function() {
+                    updatepasswordModal.style.display = "none";
+                });
+            }); {% endcomment %}
+
+            {% comment %} document.addEventListener("DOMContentLoaded", function() {
+                const deletePasswordButton = document.getElementById("deletePass");
+                const deletepasswordModal = document.getElementById("deletepasswordModal");
+                const closeButton4 = document.getElementById("closeButton4");
+            
+                deletePasswordButton.addEventListener("click", function() {
+                    deletepasswordModal.style.display = "block";
+                });
+            
+                closeButton4.addEventListener("click", function() {
+                    deletepasswordModal.style.display = "none";
+                });
+            }); {% endcomment %}
+
         </script>
         
 

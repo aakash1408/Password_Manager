@@ -203,6 +203,7 @@ main{
     flex: 1 1 auto;
     overflow-y: auto;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 10px;
@@ -218,7 +219,7 @@ main{
     padding: 10px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: white;
+    background-color: #bedefa;
     width: 200px;
     height: 200px;
     margin: 15px;
@@ -229,18 +230,18 @@ main{
     
     
     font-size: 18px;
-    margin-bottom: 5px;
+    
 }
 
 .display-item p {
     
-    margin-top: 30px;
+    margin-top: 5px;
     font-size: 14px;
     color: #555;
 }
 
 
-.display-item .view-button {
+.display-item .view-button, .update-button {
     margin-bottom: 10px;
     background-color: #007bff;
     color: white;
@@ -255,6 +256,27 @@ main{
 .display-item .view-button:hover {
     background-color: #0056b3;
 }
+
+
+
+
+
+.display-item .delete-button {
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.display-item .delete-button:hover {
+    background-color: #0056b3;
+}
+
 
 #addPass {
     display: inline-block;
@@ -482,6 +504,25 @@ main{
 
 .social-icon:hover {
     color: #00aced; 
+}
+
+ul.messages {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+ul.messages li.message {
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+ul.messages li.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
 }
 
 

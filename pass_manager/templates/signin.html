@@ -7,6 +7,7 @@
         <title>Aegis</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
         <link rel="stylesheet" href="{% static 'signin_styles.css' %}">
     </head>
     <body>
@@ -30,8 +31,8 @@
               <span style="color: red; font-size: 13px;">{{ username_taken }}</span>
               {% endif %}
               <button type="submit">Sign In</button>
-              <div class="separator">or</div>
-              <button id="google-signup">Sign In with Google</button>
+              {% comment %} <div class="separator">or</div>
+              <button id="google-signup">Sign In with Google</button> {% endcomment %}
             </form>
           </div>
     </body>

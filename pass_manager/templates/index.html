@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Aegis</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,19 +124,20 @@
         <div class="feature">
             <img src="{% static 'images/cyber4.jpg' %}" alt="Feature 1">
             <h3>Secure Storage</h3>
-            <p>Safely store your passwords in an encrypted vault.</p>
+            <p>Safely store your passwords.</p>
         </div>
         <div class="feature">
             <img src="{% static 'images/cyber2.jpg' %}" alt="Feature 2">
-            <h3>Password Generator</h3>
-            <p>Create strong and unique passwords with our generator.</p>
+            <h3>Password Manager</h3>
+            <p>Manage all your passwords.</p>
         </div>
         <div class="feature">
             <img src="{% static 'images/cyber3.jpg' %}" alt="Feature 3">
-            <h3>Auto-Fill</h3>
+            <h3>Single Master password</h3>
             <p>Effortlessly fill login forms with saved credentials.</p>
         </div>
     </section>
+
 
 
     <footer class="footer" id = "foot">
@@ -157,6 +159,38 @@
         </div>
     </footer>
     
+
+    {% comment %} <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+// Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+// Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        }
+
+    </script> {% endcomment %}
 
 
 
